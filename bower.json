@@ -1,7 +1,10 @@
 {
   "name": "jhu-govex-dev",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "basscss-sass": "~2.0.0",
+    "loadcss": "~0.1.7"
+  },
   "devDependencies": {
     "chai": "~3.2.0",
     "mocha": "~2.2.5"
