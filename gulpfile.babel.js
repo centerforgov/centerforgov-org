@@ -3,6 +3,7 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
 import del from 'del';
+import critical from 'critical';
 import {stream as wiredep} from 'wiredep';
 
 const $ = gulpLoadPlugins();
@@ -138,6 +139,18 @@ gulp.task('serve:test', () => {
 
   gulp.watch('test/spec/**/*.js').on('change', reload);
   gulp.watch('test/spec/**/*.js', ['lint:test']);
+});
+
+gulp.task('critical', ['build'], function(){
+  critical.generate({
+    inline: true,
+    base: 'dist/',
+    src: 'index.html',
+    dest: 'dist/index.html',
+    width: 375,
+    height: 667,
+    ignore: ['@font-face',/url\(/]
+  });
 });
 
 // inject bower components
