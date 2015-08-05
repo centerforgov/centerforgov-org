@@ -1,50 +1,271 @@
-$font-family: gentona, "proxima nova", 'Helvetica Neue', Helvetica, sans-serif !default;
-$line-height: 1.5 !default;
-$heading-font-family: $font-family !default;
-$heading-font-weight: bold !default;
-$heading-line-height: 1.25 !default;
-$monospace-font-family: 'Source Code Pro', Consolas, monospace !default;
-$h1: 2rem !default;
-$h2: 1.5rem !default;
-$h3: 1.25rem !default;
-$h4: 1rem !default;
-$h5: .875rem !default;
-$h6: .75rem !default;
-$bold-font-weight: bold !default;
-$space-1: .5rem !default;
-$space-2: 1rem !default;
-$space-3: 2rem !default;
-$space-4: 4rem !default;
+$default-font-family: gentona, 'proxima nova', 'Helvetica Neue', Helvetica, sans-serif;
+$heading-font-family: quadon, $default-font-family;
+$default-line-height: 1.4;
+$fz-deci: 0.59375rem;
+$fz: 0.875rem;
+$h1: 19.5rem;
+$h2: 2.625rem;
+$h3: 1.8125rem;
+$black: #4a484c;
+$green: #86c8bc;
+$grey: #e5e2e0;
+$blue: #418fde;
 
-// bower:scss
-@import "bower_components/basscss-sass/basscss.scss";
-// endbower
+@import 'bower_components/sanitize-css/sanitize.scss';
+@import 'bower_components/breakpoint-sass/stylesheets/_breakpoint.scss';
 
-body {
-  background: #fafafa;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #333;
-}
 
-.hero-unit {
-  margin: 50px auto 0 auto;
-  width: 300px;
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 30px;
-  background-color: #eee;
-  border-radius: 6px;
-  padding: 60px;
-  h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
+
+
+
+//
+// @TODO: Add docs to _ir!
+//
+@mixin _ir($w, $h) {
+  overflow: hidden;
+  @if variable-exists('w') {
+    width: $w*1px;
+  }
+  @if variable-exists('h') {
+    height: $h*1px;
+  }
+  &:before {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 150%;
   }
 }
 
-.browserupgrade {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+
+//
+// @TODO: Add docs to _container!
+//
+@mixin _container {
+  width: 85%;
+  max-width: 64rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+//
+// @TODO: Add docs to _section!
+//
+@mixin _section($pad: null) {
+  margin-top: 4rem;
+  font-size: 1.8125rem;
+  font-weight: bold;
+  line-height: 1.2;
+  @if $pad == true {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+
+//
+// @TODO: Add docs to _animate!
+//
+@mixin _animate {
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+
+:root {
+  color: $black;
+}
+
+
+
+
+a {
+  @include _animate;
+}
+
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  line-height: 1;
+}
+
+
+h1,
+.h1 {
+  font-size: $h1;
+}
+
+h2,
+.h2 {
+  font-size: $h2;
+}
+
+h3,
+.h3 {
+  font-size: $h3;
+}
+
+
+
+
+img { max-width: 100%; height: auto; }
+svg { max-width: 100%; height: auto; }
+
+
+
+
+
+.hide {
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px;
+  height: 1px;
+}
+
+
+
+.site-masthead {
+}
+
+
+.brand-21cc {
+  @include _ir(240, 170);
+
+  display: block;
+  margin: 0 auto;
+  background: transparent url('../images/jhu-21st-century-logo.svg') center center no-repeat;
+}
+
+.govex-intro {
+  @include _container;
+  @include _section;
+
+  color: $green;
+}
+
+.govex-intro-title {
+  // hack to make sure G in "GovEx" lined up
+  margin-left: -0.05em;
+  font-family: $heading-font-family;
+  font-size: 314px;
+  line-height: 1;
+}
+
+
+
+
+
+.partners {
+  @include _section;
+  @include _container;
+}
+
+.partners-heading {
+}
+
+
+
+
+
+.books {
+  @include _section($pad: true);
+
+  background-color: $grey;
+}
+
+.books-canister {
+  @include _container;
+}
+
+.books-list {
+  overflow: auto;
+  padding-left: 0;
+  margin-top: 2.625rem;
+  list-style: none;
+  display: table;
+  text-align: center;
+}
+
+.books-list-item {
+  @include breakpoint(45rem) {
+    display: table-cell;
+    padding-right: 1rem;
+  }
+}
+
+.books-list-item + .books-list-item {
+  @include breakpoint(45rem) {
+    padding-left: 1rem;
+    margin-top: 0;
+  }
+
+  margin-top: 2.625rem;
+}
+
+
+
+.wwc {
+  @include _container;
+  @include _section;
+
+  color: $blue;
+  a:link,
+  a:active,
+  a:visited {
+    text-decoration: underline;
+  }
+  a:hover,
+  a:focus {
+    text-decoration: underline;
+    color: $black;
+  }
+}
+
+
+
+
+.contact {
+  @include _container;
+  @include _section;
+  a:link,
+  a:active,
+  a:visited {
+    text-decoration: underline;
+  }
+  a:hover,
+  a:focus {
+    text-decoration: underline;
+    color: $black;
+  }
+}
+
+
+
+
+.join-us {
+  @include _container;
+  @include _section;
+}
+
+
+
+
+
+.site-info {
+  @include _section($pad: true);
+
+  color: white;
+  background: $black;
+}
+
+.site-info-canister {
+  @include _container;
 }
