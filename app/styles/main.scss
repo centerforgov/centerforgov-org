@@ -10,6 +10,7 @@ $black: #4a484c;
 $green: #86c8bc;
 $grey: #e5e2e0;
 $blue: #418fde;
+$yellow: #ffcd00;
 
 @import 'bower_components/sanitize-css/sanitize.scss';
 @import 'bower_components/breakpoint-sass/stylesheets/_breakpoint.scss';
@@ -21,12 +22,13 @@ $blue: #418fde;
 //
 // @TODO: Add docs to _ir!
 //
-@mixin _ir($w, $h) {
+@mixin _ir($w: null, $h: null) {
   overflow: hidden;
-  @if variable-exists('w') {
+  @if type-of($w) == 'number' {
+
     width: $w*1px;
   }
-  @if variable-exists('h') {
+  @if type-of($h) == 'number' {
     height: $h*1px;
   }
   &:before {
@@ -115,8 +117,14 @@ h3,
 
 
 
-img { max-width: 100%; height: auto; }
-svg { max-width: 100%; height: auto; }
+img {
+  max-width: 100%;
+  height: auto;
+}
+svg {
+  max-width: 100%;
+  height: auto;
+}
 
 
 
@@ -133,14 +141,17 @@ svg { max-width: 100%; height: auto; }
 
 
 .site-masthead {
+  width: 50%;
+  max-width: 270px;
+  margin: 0 auto;
 }
 
 
 .brand-21cc {
-  @include _ir(240, 170);
-
+  @include _ir;
   display: block;
-  margin: 0 auto;
+  height: 0;
+  padding-top: 70.833333333%;
   background: transparent url('../images/jhu-21st-century-logo.svg') center center no-repeat;
 }
 
@@ -155,8 +166,20 @@ svg { max-width: 100%; height: auto; }
   // hack to make sure G in "GovEx" lined up
   margin-left: -0.05em;
   font-family: $heading-font-family;
-  font-size: 314px;
+  font-size: 88px;
   line-height: 1;
+
+  @include breakpoint(28rem) {
+    font-size: 128px;
+  }
+
+  @include breakpoint(45rem) {
+    font-size: 200px;
+  }
+
+  @include breakpoint(64rem) {
+    font-size: 314px;
+  }
 }
 
 
@@ -172,6 +195,78 @@ svg { max-width: 100%; height: auto; }
 }
 
 
+.cities-list {
+  margin-top: 2rem;
+  list-style: none;
+}
+
+.cities-list-item {
+  @include breakpoint(45rem) {
+    display: inline-block;
+    width: 11.75%;
+    font-size: 14px;
+  }
+}
+
+.cities-list-item + .cities-list-item {
+  @include breakpoint(45rem) {
+    margin-top: 0;
+  }
+
+  margin-top: 1rem;
+}
+
+.cities-item {
+  display: block;
+  position: relative;
+  height: 0;
+  padding-top: 100%;
+  border-radius: 100%;
+  background-color: $grey;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+}
+
+.cities-item-title {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+#cities-chattanooga {
+  background-image: url('../images/cities-chattanooga.png');
+}
+
+#cities-jackson {
+  background-image: url('../images/cities-jackson.png');
+}
+
+#cities-kc {
+  background-image: url('../images/cities-kc.png');
+}
+
+#cities-louisville {
+  background-image: url('../images/cities-louisville.png');
+}
+
+#cities-mesa {
+  background-image: url('../images/cities-mesa.png');
+}
+
+#cities-nola {
+  background-image: url('../images/cities-nola.png');
+}
+
+#cities-seattle {
+  background-image: url('../images/cities-seattle.png');
+}
+
+#cities-tulsa {
+  background-image: url('../images/cities-tulsa.png');
+}
 
 
 
@@ -186,18 +281,17 @@ svg { max-width: 100%; height: auto; }
 }
 
 .books-list {
+  display: table;
   overflow: auto;
   padding-left: 0;
   margin-top: 2.625rem;
   list-style: none;
-  display: table;
   text-align: center;
 }
 
 .books-list-item {
   @include breakpoint(45rem) {
     display: table-cell;
-    padding-right: 1rem;
   }
 }
 
@@ -243,7 +337,7 @@ svg { max-width: 100%; height: auto; }
   a:hover,
   a:focus {
     text-decoration: underline;
-    color: $black;
+    color: $yellow;
   }
 }
 
@@ -254,6 +348,28 @@ svg { max-width: 100%; height: auto; }
   @include _container;
   @include _section;
 }
+
+.job-list {
+  margin-top: 1rem;
+  list-style: none;
+}
+
+.job-list-item {
+}
+
+.job-item-link {
+  a:link,
+  a:active,
+  a:visited {
+    text-decoration: underline;
+  }
+  &:hover,
+  &:focus {
+    color: $yellow;
+  }
+}
+
+
 
 
 
@@ -268,4 +384,30 @@ svg { max-width: 100%; height: auto; }
 
 .site-info-canister {
   @include _container;
+}
+
+.site-info-copyright {
+  text-align: center;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.site-info-brand-21cc {
+  @include _ir(240, 170);
+
+  display: block;
+  margin: 0 auto;
+  background: transparent url('../images/jhu-21st-century-logo-white.svg') center center no-repeat;
+}
+
+.site-info-brand-govex {
+  display: block;
+  width: 240px;
+  margin-top: 2rem;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  font-family: $heading-font-family;
+  font-size: 29px;
+  line-height: 1;
 }
