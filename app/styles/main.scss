@@ -174,11 +174,7 @@ svg {
   }
 
   @include breakpoint(45rem) {
-    font-size: 200px;
-  }
-
-  @include breakpoint(64rem) {
-    font-size: 314px;
+    font-size: 156px;
   }
 }
 
