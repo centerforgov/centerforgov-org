@@ -174,11 +174,7 @@ svg {
   }
 
   @include breakpoint(45rem) {
-    font-size: 200px;
-  }
-
-  @include breakpoint(64rem) {
-    font-size: 314px;
+    font-size: 156px;
   }
 }
 
@@ -410,4 +406,13 @@ svg {
   font-family: $heading-font-family;
   font-size: 29px;
   line-height: 1;
+}
+
+.site-info-brand-wwc-bbp {
+  @include _ir(240, 41);
+  display: block;
+  overflow:hidden;
+  margin:0 auto;
+  background: transparent url(../images/whatworkscitiesbbp-white.png) center center no-repeat;
+  background-size: cover;
 }
